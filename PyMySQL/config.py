@@ -17,11 +17,11 @@ def insertar_registros():
     try:
         with conexion.cursor() as cursor:
             # Insertar un usuario
-            cursor.execute("INSERT INTO usuarios (nombre, password, email) VALUES ('Juan Pérez', 'password123', 'juan.perez@example.com')")
+            cursor.execute("INSERT INTO usuarios (nombre, password, email) VALUES ('Arya Pérez', 'password123', 'arya@example.com')")
             id_usuario = cursor.lastrowid
             
             # Insertar una película
-            cursor.execute("INSERT INTO peliculas (nombre, genero, duracion) VALUES ('Inception', 'Ciencia Ficción', 148)")
+            cursor.execute("INSERT INTO peliculas (nombre, genero, duracion) VALUES ('The Lobster', 'Ciencia Ficción', 150)")
             id_pelicula = cursor.lastrowid
             
             # Insertar una renta, asumiendo que la fecha actual es la de la renta
@@ -77,6 +77,6 @@ def eliminar_rentas_antiguas():
 
 if __name__ == "__main__":
     insertar_registros()
-    filtrar_usuarios_por_apellido('Pérez')  
-    cambiar_genero_pelicula('Inception', 'Aventura')
+    filtrar_usuarios_por_apellido('Pérez')
+    cambiar_genero_pelicula('The Lobster', 'Sci-Fi')
     eliminar_rentas_antiguas()
