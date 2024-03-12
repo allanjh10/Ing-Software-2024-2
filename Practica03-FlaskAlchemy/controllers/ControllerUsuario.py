@@ -18,7 +18,6 @@ def agregar_usuario():
         password = request.form.get('password')
         email = request.form.get('email')
         superUser = True if request.form.get('superUser') == 'on' else False
-        #hashed_password = generate_password_hash(password)
         nuevo_usuario = Usuario(nombre=nombre, password=password, email=email, superUser=superUser)
         db.session.add(nuevo_usuario)
         try:

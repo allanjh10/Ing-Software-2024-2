@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Películas</title>
+</head>
+<body>
+    <h1>Listado de Películas</h1>
+    <a href="{{ url_for('pelicula.agregar_pelicula') }}">Agregar Nueva Película</a>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Género</th>
+                <th>Duración (min)</th>
+                <th>Inventario</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pelicula in peliculas %}
+            <tr>
+                <td>{{ pelicula.idPelicula }}</td>
+                <td>{{ pelicula.nombre }}</td>
+                <td>{{ pelicula.genero }}</td>
+                <td>{{ pelicula.duracion }}</td>
+                <td>{{ pelicula.inventario }}</td>
+                <td>
+                    <a href="{{ url_for('pelicula.editar_pelicula', idPelicula=pelicula.idPelicula) }}">Editar</a>
+                    <form action="{{ url_for('pelicula.eliminar_pelicula', idPelicula=pelicula.idPelicula) }}" method="post" onsubmit="return confirm('¿Estás seguro de querer eliminar esta película?');" style="display: inline;">
+                        <input type="submit" value="Eliminar">
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
