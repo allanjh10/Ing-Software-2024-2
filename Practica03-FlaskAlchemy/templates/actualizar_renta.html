@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Actualizar Estado de la Renta</title>
+</head>
+<body>
+    <h1>Actualizar Estado de la Renta</h1>
+    <form action="{{ url_for('rentar.actualizar_renta', idRentar=renta.idRentar) }}" method="post">
+        <div>
+            <label>ID Renta: {{ renta.idRentar }}</label><br>
+            <label>Estado actual: {{ 'Entregada' if renta.estatus else 'Pendiente' }}</label><br>
+            <input type="hidden" name="estatus" value="{{ not renta.estatus }}">
+            <input type="submit" value="Cambiar Estado">
+        </div>
+    </form>
+    <a href="{{ url_for('rentar.listar_rentas') }}">Volver a la lista de rentas</a>
+</body>
+</html>

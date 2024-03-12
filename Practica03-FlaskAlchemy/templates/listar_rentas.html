@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Rentas</title>
+    <style>
+        .vencida { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Listado de Rentas</h1>
+    <a href="{{ url_for('rentar.agregar_renta') }}">Agregar Nueva Renta</a>
+    <table>
+        <thead>
+            <tr>
+                <th>ID Renta</th>
+                <th>ID Usuario</th>
+                <th>ID Película</th>
+                <th>Fecha de Renta</th>
+                <th>Días de Renta</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for renta in rentas %}
+            <tr class="{{ 'vencida' if renta.vencida else '' }}">
+                <td>{{ renta.idRentar }}</td>
+                <td>{{ renta.idUsuario }}</td>
+                <td>{{ renta.idPelicula }}</td>
+                <td>{{ renta.fecha_renta.strftime('%Y-%m-%d') }}</td>
+                <td>{{ renta.dias_de_renta }}</td>
+                <td>{{ 'Entregada' if renta.estatus else 'Pendiente' }}</td>
+                <td>
+                    <a href="{{ url_for('rentar.actualizar_renta', idRentar=renta.idRentar) }}">Editar Estado</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

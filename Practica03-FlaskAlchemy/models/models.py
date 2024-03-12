@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, LargeBinary, Boolean
 from sqlalchemy.orm import relationship
 
@@ -42,19 +43,19 @@ class Pelicula(db.Model):
 
 class Rentar(db.Model):
     __tablename__ = 'rentar'
-    idRentar = Column(Integer, primary_key=True, autoincrement=True)
-    idUsuario = Column(Integer, ForeignKey('usuarios.idUsuario'), nullable=False)
-    idPelicula = Column(Integer, ForeignKey('peliculas.idPelicula'), nullable=False)
-    fecha_renta = Column(DateTime, nullable=False)
-    dias_de_renta = Column(Integer, nullable=True, default=5)
-    estatus = Column(Boolean, nullable=True, default=False)
+    idRentar = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    idUsuario = db.Column(db.Integer, db.ForeignKey('usuarios.idUsuario'), nullable=False)
+    idPelicula = db.Column(db.Integer, db.ForeignKey('peliculas.idPelicula'), nullable=False)
+    fecha_renta = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
+    dias_de_renta = db.Column(db.Integer, nullable=True, default=5)
+    estatus = db.Column(db.Boolean, nullable=True, default=False)
+    
+    usuario = relationship('Usuario')
+    pelicula = relationship('Pelicula')
 
-    usuario = relationship('Usuario', backref='rentas')
-    pelicula = relationship('Pelicula', backref='rentas')
-
-    def __init__(self, usuario, pelicula, fecha_renta, dias_de_renta=5, estatus=False):
-        self.usuario = usuario
-        self.pelicula = pelicula
+    def __init__(self, idUsuario, idPelicula, fecha_renta, dias_de_renta=5, estatus=False):
+        self.idUsuario = idUsuario
+        self.idPelicula = idPelicula
         self.fecha_renta = fecha_renta
         self.dias_de_renta = dias_de_renta
         self.estatus = estatus
