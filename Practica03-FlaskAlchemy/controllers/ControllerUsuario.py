@@ -1,7 +1,7 @@
 # controllers/ControllerUsuario.py
 
 from flask import Blueprint, request, render_template, flash, redirect, url_for
-from models.models import db, Usuario
+from models.models import db, Usuario, Rentar
 from werkzeug.security import generate_password_hash
 
 usuario_blueprint = Blueprint('usuario', __name__, url_prefix='/usuario')
@@ -39,19 +39,27 @@ def editar_usuario(idUsuario):
     if request.method == 'POST':
         usuario.nombre = request.form['nombre']
         usuario.email = request.form['email']
-        # No actualizamos password por simplicidad y seguridad.
-        # La foto de perfil no se actualiza.
-        usuario.superUser = True if 'superUser' in request.form else False
-        db.session.commit()
-        flash('Usuario actualizado con éxito.')
+        usuario.superUser = 'superUser' in request.form
+        try:
+            db.session.commit()
+            flash('Usuario actualizado con éxito.', 'success')
+        except Exception as e:
+            db.session.rollback()
+            flash(f'Error al actualizar el usuario: {e}', 'error')
         return redirect(url_for('usuario.listar_usuarios'))
-
     return render_template('editar_usuario.html', usuario=usuario)
 
-@usuario_blueprint.route('/eliminar/<int:idUsuario>', methods=['GET', 'POST'])
+@usuario_blueprint.route('/eliminar/<int:idUsuario>', methods=['POST'])
 def eliminar_usuario(idUsuario):
     usuario = Usuario.query.get_or_404(idUsuario)
-    db.session.delete(usuario)
-    db.session.commit()
-    flash('Usuario eliminado con éxito.')
+    try:
+        Rentar.query.filter_by(idUsuario=idUsuario).delete()
+        db.session.delete(usuario)
+        db.session.commit()
+        flash('Usuario eliminado con éxito.', 'success')
+    except Exception as e:
+        db.session.rollback()
+        flash(f'Error al eliminar el usuario: {e}', 'error')
+
     return redirect(url_for('usuario.listar_usuarios'))
+

@@ -12,6 +12,7 @@
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Email</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -20,6 +21,14 @@
                 <td>{{ usuario.idUsuario }}</td>
                 <td>{{ usuario.nombre }}</td>
                 <td>{{ usuario.email }}</td>
+                <td>
+                    <!-- Enlace para editar el usuario -->
+                    <a href="{{ url_for('usuario.editar_usuario', idUsuario=usuario.idUsuario) }}">Editar</a>
+                    <!-- Formulario para eliminar el usuario -->
+                    <form action="{{ url_for('usuario.eliminar_usuario', idUsuario=usuario.idUsuario) }}" method="post" style="display: inline;" onsubmit="return confirm('¿Estás seguro de querer eliminar este usuario?');">
+                        <input type="submit" value="Eliminar">
+                    </form>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
