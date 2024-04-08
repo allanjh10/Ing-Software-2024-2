@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 
-function PeliculaUpdateForm({ getPeliculaById, updatePelicula }) {
+const PeliculaUpdateForm = ({ peliculas, updatePelicula }) => {
     const { id } = useParams();
     const history = useHistory();
-    const [pelicula, setPelicula] = useState({ nombre: '', genero: '', duracion: '', inventario: '' });
+    const [pelicula, setPelicula] = useState({
+        nombre: '',
+        genero: '',
+        duracion: '',
+        inventario: ''
+    });
 
     useEffect(() => {
-        const pelicula = getPeliculaById(id);
-        if (pelicula) {
-            setPelicula(pelicula);
-        } else {
-            // Handle error or redirect
-            history.push('/listar');
+        const peliculaActual = peliculas.find(p => p.id.toString() === id);
+        if (peliculaActual) {
+            setPelicula(peliculaActual);
         }
-    }, [id, getPeliculaById, history]);
+    }, [id, peliculas]);
 
     const handleChange = (e) => {
         setPelicula({ ...pelicula, [e.target.name]: e.target.value });
@@ -23,26 +25,31 @@ function PeliculaUpdateForm({ getPeliculaById, updatePelicula }) {
     const handleSubmit = (e) => {
         e.preventDefault();
         updatePelicula(id, pelicula);
-        history.push('/listar');
+        history.push('/peliculas');
     };
 
     return (
         <form onSubmit={handleSubmit}>
-            <label>Nombre:
+            <h2>Editar Película</h2>
+            <div>
+                <label>Nombre:</label>
                 <input type="text" name="nombre" value={pelicula.nombre} onChange={handleChange} required />
-            </label>
-            <label>Género:
+            </div>
+            <div>
+                <label>Género:</label>
                 <input type="text" name="genero" value={pelicula.genero} onChange={handleChange} required />
-            </label>
-            <label>Duración (minutos):
+            </div>
+            <div>
+                <label>Duración (minutos):</label>
                 <input type="number" name="duracion" value={pelicula.duracion} onChange={handleChange} required />
-            </label>
-            <label>Inventario:
+            </div>
+            <div>
+                <label>Inventario:</label>
                 <input type="number" name="inventario" value={pelicula.inventario} onChange={handleChange} required />
-            </label>
+            </div>
             <button type="submit">Actualizar Película</button>
         </form>
     );
-}
+};
 
 export default PeliculaUpdateForm;

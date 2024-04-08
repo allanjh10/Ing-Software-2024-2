@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import './styles/Pelicula.css';
 
 function PeliculaForm({ onSave }) {
@@ -9,6 +10,7 @@ function PeliculaForm({ onSave }) {
         inventario: ''
     });
 
+    const history = useHistory();
     const handleChange = (e) => {
         setPelicula({ ...pelicula, [e.target.name]: e.target.value });
     };
@@ -20,7 +22,8 @@ function PeliculaForm({ onSave }) {
             return;
         }
         onSave(pelicula);
-        setPelicula({ nombre: '', genero: '', duracion: '', inventario: '' }); // Reset formulario
+        setPelicula({ nombre: '', genero: '', duracion: '', inventario: '' });
+        history.push('/peliculas');
     };
 
     return (

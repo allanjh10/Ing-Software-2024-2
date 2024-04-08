@@ -1,17 +1,19 @@
 import React from 'react';
-import './styles/Pelicula.css';
+import { Link } from 'react-router-dom';
 
-function PeliculaList({ peliculas, onDelete }) {
+const PeliculaList = ({ peliculas, onDelete }) => {
     return (
         <div className="pelicula-list">
-            <h2>Listado de Películas</h2>
             {peliculas.map(pelicula => (
-                <div key={pelicula.id} className="pelicula-item">
+                <div className="pelicula-item" key={pelicula.id}>
                     <h3>{pelicula.nombre}</h3>
                     <p>Género: {pelicula.genero}</p>
                     <p>Duración: {pelicula.duracion} minutos</p>
                     <p>Inventario: {pelicula.inventario}</p>
-                    <button onClick={() => onDelete(pelicula.id)}>Eliminar</button>
+                    <div className="action-buttons">
+                        <Link to={`/peliculas/editar/${pelicula.id}`} className="action-button edit">Editar</Link>
+                        <button onClick={() => onDelete(pelicula.id)} className="action-button delete">Eliminar</button>
+                    </div>
                 </div>
             ))}
         </div>
