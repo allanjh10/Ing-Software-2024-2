@@ -1,0 +1,69 @@
+.pelicula-list {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.pelicula-item {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.pelicula-item:last-child {
+    border-bottom: none;
+}
+
+.pelicula-item h3 {
+    margin: 0 0 10px 0;
+    color: #333;
+}
+
+.pelicula-item p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #666;
+}
+
+/* Estilos para el formulario de película */
+.pelicula-form {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.pelicula-form label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.pelicula-form input[type="text"],
+.pelicula-form input[type="number"],
+.pelicula-form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.pelicula-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.pelicula-form button:hover {
+    background-color: #0056b3;
+}

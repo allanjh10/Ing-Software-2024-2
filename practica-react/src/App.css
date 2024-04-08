@@ -36,3 +36,32 @@
     transform: rotate(360deg);
   }
 }
+
+
+header {
+  background-color: #343a40; /* Color de fondo oscuro para la barra de navegación */
+  padding: 10px 20px;
+}
+
+.main-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center; /* Centrar los elementos del menú horizontalmente */
+}
+
+.main-nav li {
+  margin: 0 15px;
+}
+
+.main-nav a {
+  color: white; /* Color del texto para los enlaces */
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.main-nav a:hover {
+  color: #ffc107; /* Color al pasar el mouse sobre los enlaces */
+  text-decoration: underline;
+}
