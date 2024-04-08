@@ -38,30 +38,80 @@
 }
 
 
+/* Estilos globales */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #FFFFFF;
+  color: #333333;
+  margin: 0;
+  padding: 0;
+}
+
+/* Estilización del encabezado y navegación */
 header {
-  background-color: #343a40; /* Color de fondo oscuro para la barra de navegación */
-  padding: 10px 20px;
+  background-color: #F8F8F8;
+  padding: 10px 0;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .main-nav {
   list-style: none;
-  margin: 0;
   padding: 0;
-  display: flex;
-  justify-content: center; /* Centrar los elementos del menú horizontalmente */
+  text-align: center;
 }
 
 .main-nav li {
+  display: inline;
   margin: 0 15px;
 }
 
 .main-nav a {
-  color: white; /* Color del texto para los enlaces */
+  color: #4A90E2;
   text-decoration: none;
-  font-weight: bold;
+  font-size: 18px;
+  transition: color 0.3s ease;
 }
 
-.main-nav a:hover {
-  color: #ffc107; /* Color al pasar el mouse sobre los enlaces */
+.main-nav a:hover, .main-nav a:focus {
+  color: #D0021B;
   text-decoration: underline;
+}
+
+/* Estilos para formularios y botones */
+button, input[type="submit"] {
+  background-color: #4A90E2;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover, input[type="submit"]:hover {
+  background-color: #357ABD;
+}
+
+input[type="text"], input[type="number"], textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 2px solid #CCCCCC;
+  border-radius: 4px;
+  background-color: #FFFFFF;
+  color: #333333;
+}
+
+/* Estilos para las listas y los items de películas */
+.pelicula-item {
+  background-color: #F0F0F0;
+  margin-bottom: 10px;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.pelicula-item:hover {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  transform: translateY(-2px);
 }
